@@ -1,0 +1,5 @@
+lib
+external
+*pyc
+.project
+.pydevproject

@@ -1,0 +1,42 @@
+{% load i18n  %}<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<link rel="stylesheet" href="/media/css/base.css">
+	<script src="/media/js/jquery-1.10.2.min.js"></script>
+	<script src="/media/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<title>{% block title %}{% if current_page %}{{current_page.get_title}}{% endif %}{% endblock %}
+	</title>
+	<link rel="icon" href="/favicon.ico" />
+</head>
+<body>
+	<div id="popin_wrap">
+		<div style="width:90%;margin:2em auto;border:solid 2px #b2b2b2;background:#fff;position:relative;">
+			<a href="" class="button popin_close" style="position:absolute;right:0;">Close</a>
+			<div id="popin_content"></div>
+			<br class="fn cb" />
+		</div>
+	</div>
+	<div id="bg">
+		<div id="menu">
+			<a href="/" class="{% block menu_home %}{% endblock %}">Home</a>
+			<a href="/nc/" class="{% block menu_nc %}{% endblock %}">Nonconformities</a>
+			<a href="/backlog/" class="{% block menu_backlog %}{% endblock %}">Backlog</a>
+			<br class="fn cb" />
+		</div>
+		<div id="content">
+			{% block 'content' %}{% endblock %}
+		</div>
+	</div>
+	<script>
+		$('.popin_close').click(function(){
+			$('#popin_wrap').hide();
+			return false;
+		});
+		$('.popin_open').click(function(){
+			$('#popin_content').load($(this).attr("href"));
+			$('#popin_wrap').show();
+			return false;
+		});
+	</script>
+</body>
+</html>

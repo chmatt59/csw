@@ -1,0 +1,21 @@
+{% extends 'popin/base.html' %}
+{% block content %}
+<h1>{{title}}</h1>
+<form id="popin_form" action="/nc/add/" method="post">{% csrf_token %}
+{% for field in form %}
+    <div class="left form_item{% if field.errors %} form_error{% endif %}">
+        {{ field.label_tag }}{{ field }}
+    </div>
+{% endfor %}
+	<input type="submit" class="button" style="width:99%" value="Save"/>
+</form>
+<script type="text/javascript">
+$('#popin_form').submit(function(e){
+
+	$.post('/nc/add/', data=$('#popin_form').serialize(), function(data) {
+		  $('#popin_content').html(data);
+		});
+	e.preventDefault();
+});
+</script>
+{% endblock %}

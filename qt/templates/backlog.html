@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block menu_backlog %} enable{% endblock %}
+{% block 'content' %}
+<div>
+	<div class="right list backlog">
+		<h3><span class="backlog_id">1</span> Backlog</h3>
+		<div class="sortable">
+			<div class="item"><span class="item_id">1</span> Item</div>
+			<div class="item"><span class="item_id">2</span> Item</div>
+			<div class="item"><span class="item_id">3</span> Item</div>
+			<div class="item"><span class="item_id">4</span> Item</div>
+			<div class="item"><span class="item_id">5</span> Item</div>
+			<div class="item"><span class="item_id">6</span> Item</div>
+			<div class="item"><span class="item_id">7</span> Item</div>
+			<div class="item"><span class="item_id">8</span> Item</div>
+			<div class="item"><span class="item_id">9</span> Item</div>
+		</div>
+	</div>
+	<div class="left list backlog">
+		<h3><span class="backlog_id">2</span> R7.3 26/10/2013</h3>
+		<div class="sortable">
+			<div class="item"><span class="item_id">10</span> Item</div>
+			<div class="item"><span class="item_id">11</span> Item</div>
+			<div class="item"><span class="item_id">12</span> Item</div>
+		</div>
+	</div>
+	<div class="left list backlog">
+		<h3><span class="backlog_id">3</span> Système</h3>
+		<div class="sortable">
+			<div class="item"><span class="item_id">13</span> Item</div>
+			<div class="item"><span class="item_id">14</span> Item</div>
+		</div>
+	</div>
+</div>
+ <script>
+
+	var backlogs_position = [];
+	
+	function fill_backlogs(){
+		backlogs_position = [];
+		$('.backlog').each(function(i, e){
+			positions = $(this).find('.backlog_id').text() + ':';
+			$(this).find('.item_id').each(function(i, e){positions += e.innerHTML + ',';})
+			backlogs_position.push(positions);
+		});
+	}
+	fill_backlogs();
+	
+	function save_backlogs(){
+		old = backlogs_position;
+		fill_backlogs();
+		for(i=0;i<old.length;i++){
+			if (old[i] != backlogs_position[i] && old[i].length <= backlogs_position[i].length){
+				alert(old[i] + ' -- ' + backlogs_position[i])
+			}
+		}
+	}
+	$( ".sortable" ).sortable({
+		connectWith: ".sortable",
+		revert: true,
+		delay:1,
+		revert:false,
+		cursor: 'move',
+		stop:save_backlogs,
+	});
+	$( ".sortable" ).disableSelection();
+	
+</script>
+{% endblock %}

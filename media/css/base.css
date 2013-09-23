@@ -1,0 +1,33 @@
+* {margin:0;padding:0;border:0}
+body {background:#333333;font-family:Arial;color:#000;}
+a {color:#000;text-decoration:none;}
+h2 {background:#fff;padding:0.1em 1em;margin:1em 0;}
+input, textarea {border:2px solid #ccc;}
+label {width:30%;}
+
+#bg {width:96%;margin:auto;background:#b2b2b2;}
+
+#menu {clear:both;float:none;background:#ccc;margin-bottom:5px;}
+#menu a {padding:0.5em 2em;display:block;float:left;}
+#menu a.enable {background:#fff;}
+
+#content {clear:both;}
+
+#popin_wrap {display:none;position:absolute;width:100%;}
+
+.left {display:block;float:left;}
+.right {display:block;float:right;}
+.fn {float:none;}
+.cb {clear:both;}
+.cl {clear:left;}
+.item {background:#ccc;margin:5px;padding:5px;}
+.list {background:#fff;margin-bottom:5px;width:100%;}
+.backlog {width:48%;}
+.button {background:#ccc;margin:5px;padding:5px;}
+
+.form_item {width:100%;margin-bottom:5px;}
+.form_item label {width:20%;display:block;float:left;padding:5px;}
+.form_item input, .form_item textarea {width:78%;display:block;float:left;}
+.form_error input, .form_error textarea {border:2px solid red;}
+
+.backlog_id, .item_id {display:none;}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block menu_nc %} enable{% endblock %}
+{% block 'content' %}
+<style type="text/css">
+</style>
+<div class="list left">
+	<a href="/nc/add/" class="left button popin_open">Add</a>
+	<div class="left">
+		<form id="search_form" action="" method="get">
+			{% for f in search_form %}
+			{{f}}
+			{% endfor %}
+		</form>
+	</div>
+	<br class="fn cb" />
+</div>
+<div class="list left">
+	{% for item in list %}
+	<div class="item">
+		<span class="item_id">{{item.id}}</span>
+		<a href="/nc/edit/{{item.id}}/" class="popin_open">#{{item.id}}</a>
+		{{item}}
+	</div>
+	{% endfor %}
+</div>
+<script>
+$('#search_form').change(function(){$('#search_form').submit();});
+</script>
+{% endblock %}
