@@ -11,4 +11,4 @@ class NcEditForm(forms.ModelForm):
         model = Nonconformity
 
 class NcSearchForm(forms.Form):
-    status = forms.ModelMultipleChoiceField(queryset=Status.objects.all())
+    status = forms.ModelMultipleChoiceField(queryset=Status.objects.all(), required=False)
