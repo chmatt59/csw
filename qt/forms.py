@@ -9,6 +9,7 @@ class NcAddForm(forms.ModelForm):
 class NcEditForm(forms.ModelForm):
     class Meta:
         model = Nonconformity
+        exclude = ('author',)
 
 class NcSearchForm(forms.Form):
-    status = forms.ModelMultipleChoiceField(queryset=Status.objects.all(), required=False)
+    status = forms.ModelMultipleChoiceField(queryset=Status.objects.exclude(is_close=True), required=False)

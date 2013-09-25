@@ -15,15 +15,13 @@
 	<br class="fn cb" />
 </div>
 <div class="list left">
-	{% for item in list %}
-	<div class="item">
-		<span class="item_id">{{item.id}}</span>
-		<a href="/nc/edit/{{item.id}}/" class="popin_open">#{{item.id}}</a>
-		{{item}}
-	</div>
-	{% endfor %}
+	{% for item in list %}<div class="item" id="nc_item_{{item.id}}">{% include 'nc_line.html' %}</div>{% endfor %}
 </div>
 <script>
 $('#search_form').change(function(){$('#search_form').submit();});
+
+function update_item(url, html){
+	$(html).load(url, function(){popin_handler();});
+}
 </script>
 {% endblock %}

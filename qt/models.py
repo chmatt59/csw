@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 class Status(models.Model):
     name = models.CharField(max_length=255)
     order = models.IntegerField(default=0)
+    is_close = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.name
@@ -13,10 +14,16 @@ class Status(models.Model):
     class Meta:
         ordering = ['order']
 
+PRIORITY_CHOICES = (
+    (1, 'P1'),
+    (2, 'P2'),
+    (3, 'P3'),
+    (4, 'P4'),
+)
 class Nonconformity(models.Model):
     title = models.CharField(max_length=255)
     status = models.ForeignKey(Status, default=1)
-    priority = models.IntegerField(default=0)
+    priority = models.IntegerField(default=3, choices=PRIORITY_CHOICES)
     description_short = models.TextField()
     description = models.TextField(null=True, blank=True)
     reproduction = models.TextField(null=True, blank=True)
@@ -26,7 +33,7 @@ class Nonconformity(models.Model):
     observers = models.ManyToManyField(User, related_name='observed_tickets', blank=True)
     date_creation = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)
-    #cost = models.ManyToManyField('Cost', null=True, blank=True)
+    # cost = models.ManyToManyField('Cost', null=True, blank=True)
     problem = models.ForeignKey('Problem', null=True, blank=True)
 
     def __unicode__(self):

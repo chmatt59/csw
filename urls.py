@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^nc/$', 'qt.views.nonconformities'),
     url(r'^nc/add/$', 'qt.views.nc_add'),
     url(r'^nc/edit/(?P<nc_id>.*)/$', 'qt.views.nc_edit'),
+    url(r'^nc/line/(?P<nc_id>.*)/$', 'qt.views.nc_line'),
 )
 
 if settings.DEBUG:

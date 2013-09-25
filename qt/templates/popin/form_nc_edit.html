@@ -1,0 +1,47 @@
+{% extends 'popin/form.html' %}
+{% block content %}
+<h1 id="popin_title">Edit #{{form.instance.id}} {{form.instance.title}}</h1>
+
+<form id="popin_form" class="nc_edit" action="{{action}}" method="post">{% csrf_token %}
+    {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+	<div class="left">
+		{{form.title}}
+		{{form.status}}
+		{{form.priority}}
+		staffed by {{form.assigned}}
+	</div>
+	<div class="left cl" style="margin-top:0.5em;">
+		<div class="left{% if form.description_short.errors %} form_error{% endif %}" style="padding:0.2em;">
+			{{form.description_short.label_tag}}
+			{{form.description_short}}
+		</div>
+		<div class="left{% if form.description.errors %} form_error{% endif %}" style="padding:0.2em;">
+			{{form.description.label_tag}}
+			{{form.description}}
+		</div>
+		<div class="left{% if form.reproduction.errors %} form_error{% endif %}" style="padding:0.2em;">
+			{{form.reproduction.label_tag}}
+			{{form.reproduction}}
+		</div>
+		<div class="left{% if form.expected.errors %} form_error{% endif %}" style="padding:0.2em;">
+			{{form.expected.label_tag}}
+			{{form.expected}}
+		</div>
+	</div>
+	<div class="left cb" style="margin-top:0.5em;">
+	{{form.observers}}
+	{{form.problem}}
+	</div>
+	<input type="submit" class="button" style="width:100%" value="Save"/>
+</form>
+<script type="text/javascript">
+$('#popin_form').submit(function(e){
+	$.post('{{action}}', data=$('#popin_form').serialize(), function(data) {
+		$('#popin_content').html(data);
+	});
+	$('html, body').animate({scrollTop: $("#popin_title").offset().top}, 500);
+	return false;
+});
+</script>
+{% endblock %}
+

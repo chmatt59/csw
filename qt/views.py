@@ -34,20 +34,38 @@ def nc_add(request):
             nc = form.save(commit=False)
             nc.author = request.user
             nc.save()
-            return render_to_response('popin/close_ok.html', {'text':'Add nonconfirmity'}, context_instance=RequestContext(request))
+            return render_to_response('popin/close_ok.html', {
+                'text':'Nonconfirmity added',
+                'update_function':"update_new('/nc/line/%s/');" % nc.id,
+                }, context_instance=RequestContext(request))
     else:
         form = NcAddForm()
     return render_to_response('popin/form.html', {
         'form':form,
+        'action':'/nc/add/',
         'title':'Add nonconfirmity',
     }, context_instance=RequestContext(request))
 
 def nc_edit(request, nc_id):
-    print nc_id
     nc = Nonconformity.objects.get(id=nc_id)
-    form = NcEditForm(instance=nc)
-    return render_to_response('popin/form.html', {
+    if request.POST:
+        form = NcEditForm(request.POST, instance=nc)
+        if form.is_valid():
+            form.save()
+            return render_to_response('popin/close_ok.html', {
+                'text':'Nonconfirmity saved',
+                'update_function':"update_item('/nc/line/%s/','#nc_item_%s');" % (nc.id, nc.id),
+                }, context_instance=RequestContext(request))
+    else:
+        form = NcEditForm(instance=nc)
+    return render_to_response('popin/form_nc_edit.html', {
         'form':form,
+        'action':'/nc/edit/%s/' % nc_id,
         'title':'Edit nonconfirmity #%s' % nc.id,
-    }, context_instance=RequestContext(request))
+        }, context_instance=RequestContext(request))
+
+def nc_line(request, nc_id):
+    return render_to_response('nc_line.html', {
+        'item':Nonconformity.objects.get(id=nc_id),
+        }, context_instance=RequestContext(request))
 

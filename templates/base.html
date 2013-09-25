@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div id="popin_wrap">
-		<div style="width:90%;margin:2em auto;border:solid 2px #b2b2b2;background:#fff;position:relative;">
+		<div style="" id="popin_container">
 			<a href="" class="button popin_close" style="position:absolute;right:0;">Close</a>
 			<div id="popin_content"></div>
 			<br class="fn cb" />
@@ -28,15 +28,18 @@
 		</div>
 	</div>
 	<script>
-		$('.popin_close').click(function(){
-			$('#popin_wrap').hide();
-			return false;
-		});
-		$('.popin_open').click(function(){
-			$('#popin_content').load($(this).attr("href"));
-			$('#popin_wrap').show();
-			return false;
-		});
+		function popin_handler(){
+			$('.popin_close').click(function(){
+				$('#popin_wrap').hide();
+				return false;
+			});
+			$('.popin_open').click(function(){
+				$('#popin_content').load($(this).attr("href"));
+				$('#popin_wrap').show();
+				return false;
+			});
+		}
+		popin_handler();
 	</script>
 </body>
 </html>
